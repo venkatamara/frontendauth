@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
+    
+<script type="text/javascript">
+$(document).ready(function(){
+    var flag = 0
+    $("#submit").click(function(){
+        
+        var userName = $("#user").val()
+        var email = $("#email").val()
+        var city = $("#city").val()
+        var address = $("#address").val()
+        obj = {"Username":userName, "Email":email, "City":city, "Address":address}
+        //console.log(obj);
+        data = JSON.stringify(obj)
+        console.log("Sucess")
+
+        if (flag==0) return;
+
+        $.ajax({
+           url: "http://localhost:8000/newuser",
+           headers:{"content-type":"application/json"},
+           type:"POST",
+           data:data,
+           success:function(response){
+               alert("Please clock ok to redirect to next page")
+               window.location.href="bootstrap_table.html"
+           }
+            });
+
+
+}); 
+
+
+
+$('#email').focusout(function() {
+        $(this).css('border-color', "")
+        var email = $(this).val();
+        //console.log(temp);
+
+        $.ajax({
+            url: "http://localhost:8000/validateemail/" + email,
+            type: "GET",
+            success: function(response) {
+                console.log(response)
+                if (response) {
+                    flag=0;
+                $('#email').after('<p>email already exist!</p>');//$('#email_error').text('Email already exist!');
+                }
+                else{
+                    flag=1;
+                 $('#email_error').text();
+                }
+                   // alert('email already exist')
+
+            },
+           error:function(error){
+               console.log(error)
+           }
+        });   
+           
+    });
+
+
+});
+</script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Horizontal form</h2>
+  <form class="form-horizontal" onsubmit="return false" novalidate>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="username">Username:</label>
+        <div class="col-sm-10">          
+          <input type="username" class="form-control" id="user" placeholder="Enter username" name="Username">
+        </div>
+      </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="city">City:</label>
+        <div class="col-sm-10">
+          <input type="city" class="form-control" id="city" placeholder="Enter city" name="city">
+        </div>
+      </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" id="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+
+        //   function setImageSource(imageId, imageSrc) {
+        //   $('#' + 7).attr('src', imageSrc);
+        // }
+
+        var token = localStorage.getItem('token');
+
+        if(token == null) window.location.href = 'token_login.html';
+        
+        // $.ajax({
+        //     url: "http://localhost:8000/user",
+        //     type:"GET",
+        //     headers: {
+        //     "content-type": "application/json",
+        //     'Authorization':'Token '+localStorage.getItem('token')
+        //     },
+        //     success:function(response){
+        //      console.log(response)
+        //     },
+        //     error:function(error){
+        //     console.log(error)
+        //     }
+
+        // }); 
+
+        $.ajax({
+            url: "http://localhost:8000/info/"+localStorage.getItem('id'),
+            type:"GET",
+            headers: {
+            "content-type": "application/json",
+            },
+            success:function(response){
+              console.log(response)
+               
+             // debugger;
+              let len = (response.message).length
+                    let temp=(response.message)
+                   
+                      if (temp.length>0){
+                        let loc = '<tr><td>'+temp[0].id+'</td>\
+                        <td>'+temp[0].user_city+'</td>\
+                        <td>'+temp[0].user_number+'</td>\
+                        <td><img src = http://localhost:8000'+temp[0].user_picture+' width=100px height=100px></td>\
+                        <td><a href="token_update.html">update</a></td>\
+                        <td><a href="token_upload.html">upload your image</a></td>\
+                        </tr>';
+                        $('#table').append(loc)
+                      }
+                        else {
+                          alert("please create your profile");
+                          window.location.href = "token_profile.html"
+                        }
+            },
+            error:function(error){
+
+
+            }
+        }); 
+      });
+
+      // $("#clear").click(function(){
+
+      //        localStorage.clear();
+      //        window.location.href = 'token_login.html';
+
+      //    });
+       
+
+    
+
+ 
+   
+
+</script>
+</head>
+<body>
+    
+    
+    <div class="container">
+            <h2>please click create button to complete your Profile </h2>
+
+            <table id="table" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>UserID</th> 
+                  <th>CITY</th>
+                  <th>Number</th>
+                  <th>PICTURE</th>
+                
+                </tr>
+              </thead>
+              <tbody>
+                  <th></th>
+                  <th></th>
+                  
+              </tbody>
+            </table>
+
+            
+  
+        </div>
+     
+       
+          
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#submit").click(function(event){
+        console.log("tested")
+        
+        
+        // var actionFile = $(this).attr("action");
+
+        var formValues = $(this).serialize();
+        console.log(formValues)
+
+        event.preventDefault();
+        
+    // $.post(actionFile, formValues, function(data){
+            
+    //         $("#result").html(data);
+    //     });
+    });
+});
+</script>
+</head>
+<body>
+    <form >
+        <label>Username</label>
+        <input type="text" id="user" name="username"><br><br>
+        <label>Email</label>
+        <input type="text" id="email" name="email"><br><br>
+        <label>city</label>
+        <input type="text" id="city" name="city"><br><br>
+        <label>address</label>
+        <input type="text" id="address" name="address"><br><br>
+        <input type="button" id="submit" value="Submit">
+    </form>
+    <div id="result"></div>
+    <!-- <button onclick="redirect()">Submit</button> -->
+</body>
+</html>

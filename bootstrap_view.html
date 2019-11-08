@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+  $(document).ready(function(){
+    debugger;
+    const urlparams = new URLSearchParams(window.location.search);
+    const id = urlparams.get('id');
+
+      $.ajax({
+                url:"http://localhost:8000/newuser",
+                type:"GET",
+                success:function(response){
+                  let len=(response.data).length
+                  let temp=(response.data)
+                  console.log(len)
+                  for(var i=0; i<len; i++){
+                  let loc = '<tr><td>'temp.id+'</td>\
+                            <td>'emp_name+'</td>\
+                            <td>'temp.emp_email+'</td>\
+                            <td>'temp.emp_city+'</td></tr>'
+                            $('#table').append(loc);
+                           }
+                    console.log(response)
+                },       
+                error:function(error){
+                    console.log(error)
+                }
+          });
+  });
+
+</script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Bordered Table</h2>
+  <p>The .table-bordered class adds borders to a table:</p>            
+  <table id="table" class="table table-bordered">
+    <thead>
+      <tr>
+
+        <th>ID</th> 
+        <th>USERNAME</th>
+        <th>EMAIL</th>
+        <th>CITY</th>
+  
+      </tr>
+    </thead>
+    <tbody>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

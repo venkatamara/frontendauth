@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    
+    $.ajax({
+                url:"http://localhost:8000/newuser",
+                type:"GET",
+                success:function(response){
+
+                    let len=(response.data).length
+                    let temp=(response.data)
+                    console.log(len)
+                    for(var i=0; i<len; i++){
+                        let loc = '<tr><td>'+temp[i].id+'</td><td>'+temp[i].emp_name+'</td><td>'+temp[i].emp_email+'</td><td>'+temp[i].emp_city+'</td></tr>';
+                         $('#table').append(loc);
+                        }
+                    console.log(response)},
+        
+                error:function(error){
+                    console.log(error)
+                }
+        });
+
+    </script>
+</head>
+<body>
+    <table border="2" id="table">
+    <th>id</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>City</th>
+    
+
+    </table>
+</body>
+</html>

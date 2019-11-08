@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery AJAX POST Form</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        function processForm( e ){
+            let data = {"username" : "Manojkumar","email" : "manoj@gmail.com"};
+            data  = JSON.stringify(data);
+            console.log('after string', data['username']);
+            data = JSON.parse(data);
+            console.log('after parse', data['username']);
+            $.ajax({
+                url: "http://localhost:8000/test-api",
+                headers:{"content-type": "application/json"},
+                type: 'post',
+                data: JSON.stringify(data),
+                success: function( data, textStatus, jQxhr ){
+                    console.log(data);
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                    console.log( errorThrown );
+                }
+            });
+
+            e.preventDefault();
+        }
+
+        $('#my-form').submit( processForm );
+    });
+</script>
+</head>
+<body>
+
+<form id="my-form">
+    <label>Username</label>
+    <input type="text" id="user" /><br><br>
+    <label>Email</label>
+    <input type="text" id="email"/><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#submit").click(function(){
+        
+        var userName = $("#user").val()
+        var email = $("#email").val()
+        $(this).keyup
+        var city = $("#city").val()
+        var address = $("#address").val()
+        obj = {"Username":userName, "Email":email, "City":city, "Address":address}
+        //console.log(obj);
+        data = JSON.stringify(obj)
+        console.log("Sucess")
+
+        $.ajax({
+           url: "http://localhost:8000/newuser",
+           headers:{"content-type":"application/json"},
+           type:"POST",
+           data:data,
+           success:function(response){
+               console.log(response)
+           },
+           error:function(error){
+               console.log(error)
+           }
+        });   
+           
+    });
+
+});    
+
+</script>
+</head>
+<body>
+    <form>
+        <label>Username</label>
+        <input type="text" id="user" name="username"><br><br>
+        <label>Email</label>
+        <input type="text" id="email" name="email"><br><br>
+        <label>City</label>
+        <input type="text" id="city" name="city"><br><br>
+        <label>Address</label>
+        <input type="text" id="address" name="address"><br><br>
+        <input type="button" id="submit" value="Submit">
+    </form>
+    <div id="result"></div>
+    <!-- <button onclick="redirect()">Submit</button> -->
+</body>
+</html>

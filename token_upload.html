@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+$(document).ready(function(){
+
+
+            $(document).ready(function(){
+
+                $("#upload").change(function(){
+                    var id= localStorage.getItem('id')
+                    var fd = new FormData();
+                    fd.append('file',this.files[0]);
+
+                    $.ajax({
+                        url: 'http://localhost:8000/picture/'+id,
+                        type: 'put',
+                        data: fd,
+                        contentType: false,
+                        processData: false,
+                        success: function(response){
+                            console.log(response)
+                            if(response != 0){
+                                $("#img").attr("src",response); 
+                                $(".preview img").show(); // Display image element
+                            }else{
+                                alert('file not uploaded');
+                            }
+                            window.location.href = "token_home.html"
+                        },
+                    });
+            });
+    });
+});
+
+</script>
+</head>
+<body>
+    <form>
+		<label>Upload a Picture of Yourself</label>
+		<input type="file" size="20" id="upload"><br><br>
+		<!-- <button id="button" type="submit">Submit</button> -->
+	</form>
+</body>
+</html>

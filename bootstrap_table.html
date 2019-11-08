@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    
+    $.ajax({
+                url:"http://localhost:8000/newuser",
+                type:"GET",
+                success:function(response){
+
+                    let len=(response.data).length
+                    let temp=(response.data)
+                    console.log(len)
+                    for(var i=0; i<len; i++){
+                        let loc = '<tr><td>'+temp[i].id+'</td>\
+                        <td>'+temp[i].emp_name+'</td>\
+                        <td>'+temp[i].emp_email+'</td>\
+                        <td>'+temp[i].emp_city+'</td>\
+                        <td><a href="bootstrap_formautofill.html?id='+temp[i].id+'">UPDATE</a></td>\
+                        <td><a href="bootstrap_delete.html?id='+temp[i].id+'"+>DELETE</a></td>\
+                        <td><a href="bootstrap_view.html?id='+temp[i].id+'"+>VIEW</a></td>\
+                        </tr>';
+                         $('#table').append(loc);
+                        }
+                    console.log(response)},
+        
+                error:function(error){
+                    console.log(error)
+                }
+        });
+
+    </script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Bordered Table</h2>
+  <p>The .table-bordered class adds borders to a table:</p>            
+  <table id="table" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th> 
+        <th>USERNAME</th>
+        <th>EMAIL</th>
+        <th>CITY</th>
+        <th>UPDATE</th>
+        <th>ACTION</th>
+        <th>VIEW</th>
+      </tr>
+    </thead>
+    <tbody>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
